@@ -1,0 +1,118 @@
+clear all
+clf%ose all
+clc
+
+
+N = 2;
+H = 2;
+
+Re = 40;
+
+phiL = 1;
+phiR = 0;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% exact
+
+nn = 1000;
+
+[xixi,ww] = GLLnodes(nn);
+xx = (0+1)/2+(1-0)/2*xixi;
+
+phi_ex = (exp(Re*xx)-exp(Re))/(1-exp(Re));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[xi,w] = GLLnodes(N);
+
+[h,e] = MimeticpolyVal(xi,N,1);
+
+D = spdiags([-ones(H*N,1) ones(H*N,1)],[0 1],H*N,H*N+1);
+
+E = zeros(N*H,N*H+1);
+for h=1:H
+    E((h-1)*N+(1:N),(h-1)*N+(1:N+1)) = e;
+end
+% Central
+for h=1:H
+    E(:,(h-1)*N+1) = E(:,(h-1)*N+1)/2;
+end
+% % Upwind
+% for h=1:H-1
+%     E(h*N+(1:N),h*N+1) = zeros(N,1);
+% end
+% % Downwind
+% for h=1:H-1
+%     E((h-1)*N+(1:N),h*N+1) = zeros(N,1);
+% end
+% % 1/2 Upwind, 1/2 central
+% a = 2;      % a=2 is central 
+% E(1:N,1)     = E(1:N,1)*(a-1)/a;
+% E(N+(1:N),1) = E(N+(1:N),1)/a;
+% for h=1:H-1
+%     E((h-1)*N+(1:N),h*N+1) = E((h-1)*N+(1:N),h*N+1)*(a-1)/a;
+%     E(h*N+(1:N),h*N+1) = E(h*N+(1:N),h*N+1)/a;
+% end
+
+Jac = 2;
+M0 = zeros(1,N*H+1);
+for h=1:H
+    ind = N*(h-1)+(1:N+1);
+    M0(ind) = M0(ind) + w*Jac;
+end
+M0 = diag(M0);
+% M0 = diag(w);
+
+
+M1 = zeros(N);
+for i=1:N
+    for j=1:N
+        M1(i,j) = sum(w.*e(i,:).*e(j,:)*Jac);
+    end
+end
+
+A1 = zeros(N);
+for i=1:N
+    for j=1:N
+        A1(i,j) = sum(w.*e(i,:).*e(j,:))*(2*M);
+    end
+end
+
+A = kron(eye(M),A1);
+
+
+Conv = M0*E'*D;
+Diff = -D'*M1*D;
+
+Matrix = -Re*Conv + Diff;
+
+% Boundary conditions
+
+Matrix([1 N+1],:) = [];
+
+Rhs = - phiL*Matrix(:,1) + phiR*Matrix(:,N+1);
+
+Matrix(:,[1 N+1]) = [];
+
+phi_in = Matrix\Rhs;
+
+phi = [ phiL ; phi_in ; phiR ];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+x = (0+1)/2+(1-0)/2*xi;
+
+hh = LagrangeVal(xixi,N,1);
+pphi = phi'*hh;
+
+phi_interp = (exp(Re*x)-exp(Re))/(1-exp(Re))*hh;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Figure plot
+plot(xx,phi_ex,'g')
+hold on
+plot(xx,pphi,'')
+plot(x,phi,'o','markerface','b')
+grid on
+hold off

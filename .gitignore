@@ -1,0 +1,9 @@
+
+*.zip
+
+*.fig
+*.eps
+*.ai
+*.avi
+
+*.mat
