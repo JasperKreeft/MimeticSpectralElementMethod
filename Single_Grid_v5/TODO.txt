@@ -1,0 +1,5 @@
+eigenvalue files in poisson/single/zero and /two
+poisson/single/two/nozzle randvoorwaarden kloppen niet
+poisson/single/two/ kloppen de exacte oplossingen voor de flux??
+poisson/multi/zero % EXACT INTERPOLATED FLUX SOLUTION DOES NOT EXIST !!!
+poisson/multi/zero/semicilindercase fout in postprocessen

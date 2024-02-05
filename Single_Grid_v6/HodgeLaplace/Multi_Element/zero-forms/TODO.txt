@@ -1,0 +1,4 @@
+Multielement_singlegrid % EXACT INTERPOLATED FLUX SOLUTION DOES NOT EXIST !!!
+
+semicylindercase % Wrong solution due to non-compatible orientation of adjacent elements
+    Fixed in semicylindercase_v2 through renumbering

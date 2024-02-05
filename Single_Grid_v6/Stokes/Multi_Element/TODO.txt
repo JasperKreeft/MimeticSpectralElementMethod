@@ -1,0 +1,7 @@
+triangle : transfinite mapping not working
+Stokes_me_singlegrid_LidDrivenCavity_triangle (_E9) : transfinite mapping not working
+Stokes_me_singlegrid_SIAM : No solution
+Stokes_me_singlegrid_LidDrivenCavity : No solution
+Stokes_me_AFG (_v2) : wrong solution
+semicylinder_stokes : wrong solution
+cylinder_stokes (_all) : wrong solution
