@@ -127,7 +127,7 @@ for i=1:n
     plot(x,d2hdx2(i,:),kleur(i));
 end
 grid
-legend(num2str((0:N)'),0)
+legend(num2str((0:N)'))
 
 for i=2:N
     a(i)=(-1)^(N+i)*(-(4/3*N^2+2/3)/(1-nodes(i))+4/(1-nodes(i))^2);

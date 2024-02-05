@@ -9,7 +9,7 @@
 clear all; close all; clc;
 N = 3;
 x = linspace(-1,1,1000);
-k=1;
+k = 2;
 nargout=2;
 
 if size(x,1)>size(x,2)
@@ -43,7 +43,7 @@ if k==1
     end
 elseif k==2
     for i=1:N
-        h(i,:) = T./(dTdx_z(i)*(x-nodes(i)));
+        h(i,:) = T(N+1,:)./(dTdx_z(i)*(x-nodes(i)));
     end
 elseif k==3
     for i=1:N+2
@@ -52,8 +52,8 @@ elseif k==3
 elseif k==4 || k==5
     for i=1:N+1
 %         h(i,:) = ???;
-    end;
-end;
+    end
+end
 for i=1:n
     h(i,roundn(x,-10)==roundn(nodes(i),-10)) = 1;
 end
