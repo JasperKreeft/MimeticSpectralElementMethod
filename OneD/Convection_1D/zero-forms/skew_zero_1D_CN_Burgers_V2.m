@@ -10,7 +10,7 @@ path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Librar
 dt = .02;
 
 N = 40;
-0.8;
+T = 0.8;
 
 InitInfo.shape = 'SineBurgers';
 InitInfo.X0    = 0;

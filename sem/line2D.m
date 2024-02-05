@@ -13,7 +13,7 @@ yy=linspace(-1,1,kk);
 % P11 = JacobiPoly(N,1,1);
 % innerzeros = roots(P11(N,N:-1:1))';
 % xi = sort([-1 innerzeros 1]);
-xi = gllnodes(N);
+xi = GLLnodes(N);
 % xi=linspace(-1,1,N+1);
 yi = xi;
 

@@ -14,7 +14,7 @@ yy=linspace(-1,1,kk);
 % innerzeros = roots(P11(N,N:-1:1))';
 % xi = sort([-1 innerzeros 1]);
 % xi=linspace(-1,1,N+1);
-xi = gllnodes(N);
+xi = GLLnodes(N);
 yi = xi;
 
 for i=1:N+1
