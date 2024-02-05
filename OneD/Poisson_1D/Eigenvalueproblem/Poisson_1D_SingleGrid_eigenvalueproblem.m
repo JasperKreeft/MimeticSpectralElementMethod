@@ -55,7 +55,7 @@ handle(3) = semilogy(NrCellRange,error(3,:)','-or','markerface','r');
 handle(2) = semilogy(NrCellRange,error(2,:)','-og','markerface','g');
 handle(1) = semilogy(NrCellRange,error(1,:)','-ob','markerface','b');
 grid on
-legend(handle,'1','4','9','16','25','36','49','64','81',3)%,'orientation','horizontal')
+legend(handle,'1','4','9','16','25','36','49','64','81','location','southwest')%,'orientation','horizontal')
 axis([0 N 1e-10 1e2])
 xlabel('N')
 ylabel('error eigenvalues')

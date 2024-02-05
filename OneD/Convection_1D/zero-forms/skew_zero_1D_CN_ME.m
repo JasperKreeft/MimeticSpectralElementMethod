@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
 
 if ispc; figure('windowstyle','docked'); else figure; end
 
@@ -42,7 +42,7 @@ end
 % dxxdxi = 1/2/H*L+0*XiXi;
 
 P = 1;
-if even(P); disp('Warning: P must be odd!! Calculation stopped!!'); break; end
+if even(P); disp('Warning: P must be odd!! Calculation stopped!!'); return; end
 x = (Xi.^P+Xi+2)/4*L;
 dxdxi = (P*Xi.^(P-1)+1)/4/H*L;
 xx = (XiXi.^P+XiXi+2)/4*L;
@@ -201,4 +201,4 @@ figure
 plot(taxis,L2error(1:j)/L2norm,'-o')
 
 
-rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')

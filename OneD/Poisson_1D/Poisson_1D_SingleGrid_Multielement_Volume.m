@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-NrElementRange = 2;
+NrElementRange = 2:6;
 NrCellRange = 2;
 
 kk = 1000;
@@ -114,7 +114,7 @@ C(n) = cond(L);
 end
 end
 nhf = floor(n/2);
-break
+% return
 figure
 % semilogy(NrCellRange,L2,'-')
 loglog(NrElementRange,L2,'-')
@@ -137,5 +137,5 @@ grid on
 y=ylim;
 % xlim([NrCellRange(1) NrCellRange(n)])
 ylim([1 y(2)])
-% legend(str2,'Condition number',4)
-% legend(str2,'Condition number',str,4)
+% legend(str2,'Condition number','location','northwest')
+% legend(str2,'Condition number',str,'location','northwest')

@@ -4,14 +4,14 @@ clear all
 close all
 clc
 
-if ispc
-addpath('\\AMSDC1-NA-V511\Jasper.Kreeft$\Cached\My Documents\MATLAB\MSEM\OneD\Convection_1D\Library\')
-elseif unix
-path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
-end
+% if ispc
+% addpath('\\AMSDC1-NA-V511\Jasper.Kreeft$\Cached\My Documents\MATLAB\MSEM\OneD\Convection_1D\Library\')
+% elseif unix
+% path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
+% end
 
-
-if ispc; figure('windowstyle','docked'); else figure; end
+figure
+% if ispc; figure('windowstyle','docked'); else figure; end
 
 N = 1;
 H = 11;
@@ -116,8 +116,8 @@ plot(x,y)
 %     pause(0.1)
 %     hold off
 
-if ispc
-rmpath('\\AMSDC1-NA-V511\Jasper.Kreeft$\Cached\My Documents\MATLAB\MSEM\OneD\Convection_1D\Library\')
-elseif unix
-rmpath('/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
-end
+% if ispc
+% rmpath('\\AMSDC1-NA-V511\Jasper.Kreeft$\Cached\My Documents\MATLAB\MSEM\OneD\Convection_1D\Library\')
+% elseif unix
+% rmpath('/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
+% end

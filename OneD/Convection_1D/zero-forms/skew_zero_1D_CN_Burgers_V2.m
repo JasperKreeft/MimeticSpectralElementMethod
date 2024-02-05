@@ -4,7 +4,7 @@ clc
 
 if ispc; figure('windowstyle','docked'); else figure; end
 
-path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
 % path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
 
 dt = .02;
@@ -101,4 +101,4 @@ while t<T
 
 end
 
-rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')

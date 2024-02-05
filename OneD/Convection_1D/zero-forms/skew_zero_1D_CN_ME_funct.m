@@ -1,8 +1,9 @@
 function antwoord=skew_zero_1D_CN_ME_funct(N,H,T,dt)
 
-path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% addpath('C:\Users\Jasper.Kreeft\Data\MATLAB\Codes\MimeticSpectralElementMethod\OneD\Convection_1D\Library')
 
-if ispc; figure('windowstyle','docked'); else figure; end
+figure
+% if ispc; figure('windowstyle','docked'); else figure; end
 
 % N = 4;
 % H = 12;
@@ -12,7 +13,7 @@ L = 1;
 dx = L/H;
 % dt = 0.07; CFL = v*dt/dx
 % CFL = 1.0; dt = CFL*dx/v
-figplot = 0;
+figplot = 1;
 
 InitInfo.shape = 'cosine2'; %'step'; %'Gosse1'; %
 InitInfo.X0    = [0.25 0.75];
@@ -201,7 +202,7 @@ figure
 plot(taxis,L2error(1:j)/L2norm,'-o')
 
 
-rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% rmpath('C:\Users\Jasper.Kreeft\Data\MATLAB\Codes\MimeticSpectralElementMethod\OneD\Convection_1D\Library')
 
 antwoord = L2error(j);
 

@@ -2,7 +2,9 @@ clear all
 close all
 clc
 
-path(path,'/media/My Passport/matlabfunctions/IsoRene')
+addpath('C:\Users\Jasper.Kreeft\Data\MATLAB\Codes\MimeticSpectralElementMethod/Bsplines')
+addpath('c:\Users\Jasper.Kreeft\Data\MATLAB\Toolboxes\Bsplines')
+addpath('c:\Users\Jasper.Kreeft\Data\MATLAB\Toolboxes\General')
 
 X = [-1 1];
 Nx = length(X);
@@ -126,5 +128,5 @@ grid on
 y=ylim;
 xlim([Prange(1) Prange(n)])
 ylim([1 y(2)])
-legend(str2,'Condition number',4)
-% legend(str2,'Condition number',str,4)
+legend(str2,'Condition number','location','northwest')
+% legend(str2,'Condition number',str,'location','northwest')

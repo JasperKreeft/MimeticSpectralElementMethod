@@ -2,11 +2,11 @@ clear all
 close all
 clc
 
-if ispc
-path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
-elseif isunix
-addpath('/home/jjkreeft/Convection/OneD/Convection_1D/Library')
-end
+% if ispc
+% path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% elseif isunix
+% addpath('/home/jjkreeft/Convection/OneD/Convection_1D/Library')
+% end
 
 if ispc; figure('windowstyle','docked'); else figure; end
 
@@ -223,8 +223,8 @@ figure
 plot(taxis,L2error(1:j)/L2norm,'-o')
 
 
-if ispc
-rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
-elseif isunix
-rmpath('/home/jjkreeft/Convection/OneD/Convection_1D/Library')
-end
+% if ispc
+% rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% elseif isunix
+% rmpath('/home/jjkreeft/Convection/OneD/Convection_1D/Library')
+% end

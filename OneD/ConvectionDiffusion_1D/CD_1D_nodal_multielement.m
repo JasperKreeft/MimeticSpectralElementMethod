@@ -166,4 +166,4 @@ phi_ex = (exp(Re*xx)-exp(Re))/(1-exp(Re));
 plot(xx,phi_ex,'--r')
 hold on
 plot(xx,pphi,'b-',xEG,phi,'bo','markerface','b')
-legend('exact','approx',3)
+legend('exact','approx','location','southwest')

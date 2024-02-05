@@ -4,11 +4,11 @@ clear all
 close all
 clc
 
-if ispc
-path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
-else isunix
-path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
-end
+% if ispc
+% path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% else isunix
+% path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
+% end
 
 if ispc
     fig = figure('windowstyle','docked');
@@ -139,7 +139,7 @@ while t<T
     hold on
     plot([x(2:N+1) ; x(1:N)],[phidx phidx]','g','linewidth',4)
     plot(xx,pphinew)
-%         ylim([-.2 1.2])
+    ylim([-.2 1.2])
     hold off
     pause(0.05)
     
@@ -167,6 +167,4 @@ figure
 % plot(taxis,L2error/L2norm,'-o')
 plot(taxis,L2error,'-o')
 
-rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
-
-
+% rmpath('C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')

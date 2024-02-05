@@ -125,7 +125,7 @@ xlim([Prange(1) Prange(n)])
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-path(path,'/media/My Passport/matlabfunctions/IsoRene')
+addpath('c:\Users\Jasper.Kreeft\Data\MATLAB\Toolboxes\Bsplines')
 
 X = [-1 1];
 Nx = length(X);

@@ -2,7 +2,7 @@ clear all
 clf% close all
 % clc
 
-NrCellRange = 6;
+NrCellRange = 8;
 % c = 0;
 
 L2 = zeros(size(NrCellRange));

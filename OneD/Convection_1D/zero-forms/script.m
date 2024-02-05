@@ -2,8 +2,8 @@ clear all
 close all
 clc
 
-N = 2;
-H = 16%[ 4 8 16 32 ];
+N = 5;
+H = 3;%16%[ 4 8 16 32 ];
 T = 100;  T = T-1e-10;
 dt=5e-3;
 

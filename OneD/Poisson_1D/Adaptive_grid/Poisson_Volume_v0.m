@@ -76,7 +76,7 @@ Wgll = spdiags(kron(ones(M,1),wGLL'),0,M*(N+1),M*(N+1));
 
 A11 = -Wgll*Qgll;
 
-A12 = ;
+% A12 = ;
 
 
 
@@ -130,4 +130,4 @@ phi_ex = (exp(Re*xx)-exp(Re))/(1-exp(Re));
 plot(xx,phi_ex,'--r')
 hold on
 plot(xx,pphi,'b-',xEG,phi,'bo','markerface','b')
-legend('exact','approx',3)
+legend('exact','approx','location','northwest')

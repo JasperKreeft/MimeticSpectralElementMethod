@@ -19,7 +19,7 @@ loglog(dt,esdirk4,'-^r')
 loglog([1e-3 1e-1],[1e-5 1e-1],'k')
 title('T=10 el=10 N=40')
 xlabel('\Delta t')
-legend('Gauss 4','ESDIRK 4','order 2',2)
+legend('Gauss 4','ESDIRK 4','order 2','location','southeast')
 
 
 

@@ -4,11 +4,11 @@ clear all
 close all
 clc
 
-if ispc
-path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
-else isunix
-path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
-end
+% if ispc
+% path(path,'C:\Users\Jasper\Documents\MATLAB/MSEM_codes/OneD/Convection_1D/Library')
+% else isunix
+% path(path,'/media/My Passport/MSEM/MSEM_codes/OneD/Convection_1D/Library')
+% end
 
 if ispc
     fig = figure('windowstyle','docked');

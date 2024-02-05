@@ -2,9 +2,9 @@ clear all
 clf%ose all
 clc
 
-Re = 10;
+Re = 30;
 
-NrCellRange = 7;
+NrCellRange = 9;
 
 c0   = 1;
 cNp1 = 0;

@@ -147,5 +147,5 @@ grid on
 y=ylim;
 % xlim([NrCellRange(1) NrCellRange(n)])
 ylim([1 y(2)])
-% legend(str2,'Condition number',4)
-% legend(str2,'Condition number',str,4)
+% legend(str2,'Condition number','location','northwest')
+% legend(str2,'Condition number',str,'location','northwest')

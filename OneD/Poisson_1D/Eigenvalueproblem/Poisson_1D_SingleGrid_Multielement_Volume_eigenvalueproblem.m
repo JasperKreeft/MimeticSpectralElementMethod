@@ -3,7 +3,7 @@ close all
 clc
 
 NrElementRange = 2.^(1:1:9);
-NrCellRange = 1;
+NrCellRange = 1;%:20;
 
 error = zeros(10,length(NrCellRange)*length(NrElementRange)); er = 0;
 
@@ -68,7 +68,7 @@ handle(3) = semilogy(NrCellRange,error(3,:)','-or','markerface','r');
 handle(2) = semilogy(NrCellRange,error(2,:)','-og','markerface','g');
 handle(1) = semilogy(NrCellRange,error(1,:)','-ob','markerface','b');
 grid on
-legend(handle,'1','4','9','16','25','36','49','64','81',3)%,'orientation','horizontal')
+legend(handle,'1','4','9','16','25','36','49','64','81','location','northeast')%,'orientation','horizontal')
 axis([0 N 1e-10 1e2])
 xlabel('N')
 ylabel('error eigenvalues')
@@ -87,7 +87,7 @@ handle(3) = loglog(1./NrElementRange,error(3,1:nrH),'-or','markerface','r');
 handle(2) = loglog(1./NrElementRange,error(2,1:nrH),'-og','markerface','g');
 handle(1) = loglog(1./NrElementRange,error(1,1:nrH),'-ob','markerface','b');
 % grid on
-legend(handle,'1','4','9','16','25','36','49','64','81',3)%,'orientation','horizontal')
+legend(handle,'1','4','9','16','25','36','49','64','81','location','northwest')%,'orientation','horizontal')
 axis([1e-4 1 1e-10 1e2])
 Conv = NrElementRange.^(-2*NrCellRange);
 C = 0.01;

@@ -16,8 +16,8 @@ clc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Settings
 
-H = 1; % number of spectral elements
-N = 5; % number of cells in an element
+H = 3; % number of spectral elements
+N = 3; % number of cells in an element
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Grid generation
