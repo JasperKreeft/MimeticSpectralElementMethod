@@ -1,5 +1,8 @@
 
 *.zip
+*.tar
+*.tar.gz
+*.tgz
 
 *.fig
 *.eps
@@ -12,3 +15,7 @@
 
 *.ppt
 *.pptx
+
+Single_Grid_v2/
+Single_Grid_V3/
+Single_Grid_V4/
