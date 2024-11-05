@@ -1,4 +1,4 @@
-clear all
+clear
 close all
 clc
 
@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-run Library_TwoForms/GetLibrary.m
+% run Library_TwoForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -22,11 +22,11 @@ global nr_1 nr_2
 
 FunctionType = 'sine';
 Domain       = 'SinDeformGrid';%'LavalNozzle';%'parallellogram';
-DomInfo      = 0.0;
+DomInfo      = 0.2;
 
 bc = [ 0 0 0 0 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 12%2:2:20;%4:4:40;
+NrCellRange = 2:2:20;%4:4:40;
 
 plot_figures  = 1;
 error_figures = 1;
@@ -168,6 +168,6 @@ end
 %% Close libraries
 
 in = 'finish';
-GetLibrary
+% GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

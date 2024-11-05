@@ -1,4 +1,4 @@
-clear all
+clear
 close all
 clc
 
@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-run Library_TwoForms/GetLibrary.m
+% run Library_TwoForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -26,7 +26,7 @@ DomInfo      = 0.2;
 
 bc = [ 1 0 0 0 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 24%2:2:20;%4:4:40;
+NrCellRange = 4:4:16;%2:2:20;%4:4:40;
 
 plot_figures  = 1;
 error_figures = 1;
@@ -82,8 +82,9 @@ Matrix = [   M1          D'*M2
 
 RHS = [zeros(nr_1,1) ; M2*F];
 
-A = M2*D*inv(M1)*D'*M2;
-
+% A = M2*D*inv(M1)*D'*M2;
+% A = M2*D*(M1\D')*M2;
+A = M2*D/M1*D'*M2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Remove Boundary Conditions
@@ -163,6 +164,6 @@ end
 %% Close libraries
 
 in = 'finish';
-GetLibrary
+% GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

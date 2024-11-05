@@ -1,4 +1,4 @@
-clear all
+clear
 close all
 clc
 
@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-run Library_ZeroForms/GetLibrary.m
+% run Library_ZeroForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -26,11 +26,11 @@ DomInfo      = 0.2;
 
 bc = [ 1 1 1 1 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 18;%3:2:25;
+NrCellRange = 4:4:16;%3:2:25;
 numElements = 1;
 
 plot_figures  = 1;
-error_figures = 0;
+error_figures = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start P-convergence loop
@@ -164,6 +164,6 @@ end
 %% Close libraries
 
 in = 'finish';
-GetLibrary
+% GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

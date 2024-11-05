@@ -1,5 +1,5 @@
 % WERKT NIET, OA RANDVOORWAARDEN KLOPPEN NIET !!!
-clear all
+clear
 close all
 clc
 
@@ -7,7 +7,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-run Library_TwoForms/GetLibrary.m
+% run Library_TwoForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -138,6 +138,6 @@ plotten
 %% Close libraries
 
 in = 'finish';
-GetLibrary
+% GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

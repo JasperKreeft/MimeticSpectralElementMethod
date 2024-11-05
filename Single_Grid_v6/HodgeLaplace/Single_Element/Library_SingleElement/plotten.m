@@ -1,11 +1,12 @@
 %% Plotten %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if exist('PHI','var')
-plotPotential
+    plotPotential
 end
 
 if exist('Q','var')
-plotFlux(Meshp,qx,qy,qMag,qx_interp,qy_interp,q_interp,FunctionType,Domain)
+    plotFlux(Meshp,qx,qy,qMag,qx_interp,qy_interp,q_interp, ...
+             FunctionType,Domain)
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -6,15 +6,15 @@
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clear
 close all
-clear all
 clc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-run Library/GetLibrary.m
+% run Library/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -25,9 +25,9 @@ global h e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Settings
 
-NrCellRange = 16%2:2:20;
+NrCellRange = 2:2:20;
 
-cc = 0.0;
+cc = 0.2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start P-convergence loop
@@ -77,7 +77,8 @@ E = sort(eig(full(L),full(M1)));
 
 E(abs(E)<.2)=[];
 
-exact = [1 1 2 4 4 5 5 8 9 9]';
+% exact = [1 1 2 4 4 5 5 8 9 9]';
+exact = [1 1 2 2 4 4 5 5 5 5]'; % 8 8 9 9 10 10 10 10 13 13
 nr = min(length(E),10);
 er = er+1;
 error(1:nr,er) = abs(E(1:nr)-exact(1:nr));
@@ -87,12 +88,14 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Code for convergence plots
 
-plotten
+plot_eigenvalues(E)
+
+plot_convergence_eigenvalues("N",NrCellRange,error,exact)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Close libraries
 
 in = 'finish';
-GetLibrary
+% GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

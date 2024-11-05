@@ -1,4 +1,4 @@
-function [ out1 out2 ] = exact_solution(varargin)
+function [out1,out2] = exact_solution(varargin)
 
 %% Exact Solution %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

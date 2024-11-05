@@ -14,7 +14,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-run Library/GetLibrary.m
+% run Library/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -40,7 +40,7 @@ DomInfo = 0.0;
 
 NrCellRange = 4:2:12;
 
-plot_figures  = 0;
+plot_figures  = 1;
 error_figures = 1;
 casenr        = FunctionType;
 
@@ -140,8 +140,8 @@ div_uv        = reconstruct(2,DivUV,eGLp,Meshp);
 
 % Exact Solution
 sigma_ex          = exact_solution(Meshp.X,Meshp.Y,FunctionType,'zero');
-[ u_ex v_ex ]     = exact_solution(Meshp.X,Meshp.Y,FunctionType,'one');
-[fx_ex fy_ex]     = exact_solution(Meshp.X,Meshp.Y,FunctionType,'force');
+[u_ex,v_ex]       = exact_solution(Meshp.X,Meshp.Y,FunctionType,'one');
+[fx_ex,fy_ex]     = exact_solution(Meshp.X,Meshp.Y,FunctionType,'force');
 [ng_x_ex,ng_y_ex] = exact_solution(Meshp.X,Meshp.Y,FunctionType,'d_zero');
 div_ex            = exact_solution(Meshp.X,Meshp.Y,FunctionType,'d_one');
 
@@ -166,6 +166,6 @@ end
 %% Close libraries
 
 in = 'finish';
-GetLibrary
+% GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

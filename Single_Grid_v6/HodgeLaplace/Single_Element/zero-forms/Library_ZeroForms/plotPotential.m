@@ -7,7 +7,7 @@ figure
 
 subplot(1,3,1)
 % surf(X,Y,PHI(globalnr_0))
-dotcolorplot(PHI,Mesh.X,Mesh.Y,phimin,phimax)
+dotcolorplot(PHI,Mesh.X,Mesh.Y,phimin,phimax);
 colorbar off
 view([0 0 1])
 axis('square')

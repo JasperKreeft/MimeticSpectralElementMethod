@@ -4,9 +4,6 @@ global nn numElements
 
 figure
 
-% Xp = Meshp.X;
-% Yp = Meshp.Y;
-
 Xplim = [min(min(Meshp.X)) max(max(Meshp.X))];
 Yplim = [min(min(Meshp.Y)) max(max(Meshp.Y))];
 
