@@ -1,0 +1,18 @@
+Over time, the following files can be removed.
+Files temporarily moved to OLD folder.
+
+ - innerproduct_zeroforms
+        Jacobian is treated slightly different
+        Jacobian is made sparse earlier. Speed difference?
+ - innerproduct_oneforms
+        Jacobian is treated slightly different
+        Jacobian is made sparse earlier. Speed difference?
+ - innerproduct_twoforms
+        Completely different implementation. Check consistency.
+
+innerproduct_assembly:
+ - why for 0-forms Ne and for 1- and 2-forms Ne^2 ?
+
+Check if innerproduct_assembly_tmp.m does the same as innerproduct_assembly.m
+
+Check if innerproduct_assembly_v2 is ever used. Looks like it is not finished.

@@ -1,4 +1,4 @@
-function M = innerproduct(varargin)
+function M = innerproduct(form,J,Qinv)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %
@@ -17,17 +17,6 @@ function M = innerproduct(varargin)
 
 global N w e
 
-form = varargin{1};
-
-if nargin<2
-    warning('JK: Not enough input arguments')
-    J = ones(N+1);
-else
-    J = varargin{2};
-end
-
-
-
 if size(J) == [ N+1 N+1 ]                                      %#ok<*BDSCA>
     J = reshape(J,(N+1)^2,1);
 elseif size(J) == [ 1 (N+1)^2 ]
@@ -42,10 +31,10 @@ switch form
 % Inner-product matrix for 0-forms (or (n-2)-forms with n=2)              %
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-case 0
+    case 0
 
-W0 = kron(w,w)';
-M = spdiags(J.*W0,0,(N+1)^2,(N+1)^2);
+        W0 = kron(w,w)';
+        M = spdiags(J.*W0,0,(N+1)^2,(N+1)^2);
 
 
 
@@ -55,29 +44,27 @@ M = spdiags(J.*W0,0,(N+1)^2,(N+1)^2);
 % for a single spectral element                                           %
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-case 1
+    case 1
 
-if form==1 && nargin==3
-    Qinv = varargin{3};
-else
-    error('JK: Number of input arguments are not correct')
-end
+        if form~=1 || nargin==3
+            error('JK: Number of input arguments are not correct')
+        end
 
-if size(Qinv) == [2*(N+1)^2 3]
-    Qinv = spdiags(Qinv,-1:1,2*(N+1)^2,2*(N+1)^2);
-end
+        if size(Qinv) == [2*(N+1)^2 3]
+            Qinv = spdiags(Qinv,-1:1,2*(N+1)^2,2*(N+1)^2);
+        end
 
-W1  = kron(w,w)';
-JW1 = spdiags(kron(J.*W1,ones(2,1)),0,2*(N+1)^2,2*(N+1)^2);
+        W1  = kron(w,w)';
+        JW1 = spdiags(kron(J.*W1,ones(2,1)),0,2*(N+1)^2,2*(N+1)^2);
 
-I1 = spalloc(2*(N+1)^2,2*N*(N+1),2*N*(N+1)^2);
-I1(1:2:2*(N+1)^2,1:N*(N+1)) = kron(e',speye(N+1));
-for i=1:N
-    I1(2:2:2*(N+1)^2,(N+i-1)*(N+1)+(1:N+1)) = kron(speye(N+1),e(i,:)');
-end
+        I1 = spalloc(2*(N+1)^2,2*N*(N+1),2*N*(N+1)^2);
+        I1(1:2:2*(N+1)^2,1:N*(N+1)) = kron(e',speye(N+1));
+        for i=1:N
+            I1(2:2:2*(N+1)^2,(N+i-1)*(N+1)+(1:N+1)) = kron(speye(N+1),e(i,:)');
+        end
 
-% inner-product matrix for 1-forms ( or (n-1)-forms with n=2 )
-M = I1'*Qinv'*JW1*Qinv*I1;
+        % inner-product matrix for 1-forms ( or (n-1)-forms with n=2 )
+        M = I1'*Qinv'*JW1*Qinv*I1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                         %
@@ -85,12 +72,12 @@ M = I1'*Qinv'*JW1*Qinv*I1;
 % for a single spectral element                                           %
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-case 2
+    case 2
 
-W2 = kron(w,w)';
-JW2 = spdiags(W2./J,0,(N+1)^2,(N+1)^2);
-I2 = kron(e,e)';
+        W2 = kron(w,w)';
+        JW2 = spdiags(W2./J,0,(N+1)^2,(N+1)^2);
+        I2 = kron(e,e)';
 
-M = I2'*JW2*I2;
+        M = I2'*JW2*I2;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end

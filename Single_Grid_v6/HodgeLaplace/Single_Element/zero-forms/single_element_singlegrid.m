@@ -99,11 +99,11 @@ RHS(boundary_points) = [];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Solve system and add boundary conditions to data
 
-% PHI_in = Matrix\RHS;
+PHI_in = Matrix\RHS;
 
-[L,U] = lu(Matrix);
-y=L\RHS;
-PHI_in = U\y;
+% [L,U] = lu(Matrix);
+% y=L\RHS;
+% PHI_in = U\y;
 
 PHI = zeros(nr_0,1);
 PHI(interior_points) = PHI_in;
@@ -128,13 +128,13 @@ phi          = reconstruct(0,PHI,hGLp);
 qy = -qy; % WHY ???
 
 % Exact Solution
-phi_ex          = exact_solution(Meshp.X,Meshp.Y,FunctionType,'zero');
+phi_ex        = exact_solution(Meshp.X,Meshp.Y,FunctionType,'zero');
 [qx_ex,qy_ex] = exact_solution(Meshp.X,Meshp.Y,FunctionType,'one');
 
 % phi_exact
 PHI_exact    = exact_solution(Mesh.X,Mesh.Y,FunctionType,'zero');  % Nodal exact
 phi_interp   = reconstruct(0,PHI_exact,hGLp);
-[Qxi_interp,Qeta_interp] = fluxValue(FunctionType,Domain,DomInfo);
+[Qxi_interp,Qeta_interp]       = fluxValue(FunctionType,Domain,DomInfo);
 [qx_interp,qy_interp,q_interp] = reconstruct(1,Qxi_interp,Qeta_interp,hGLp,eGLp,Meshp);
 
 % Plotten

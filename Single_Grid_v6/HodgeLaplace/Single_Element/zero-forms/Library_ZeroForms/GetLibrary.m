@@ -2,12 +2,12 @@
 
 switch in
     case 'start'
-        
+
         if ispc
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\Library_SingleGrid')
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Library_HodgeLaplace')
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\Library_SingleElement')
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\zero-forms\Library_ZeroForms')
+            path(path,'..\..\..\Library_SingleGrid')
+            path(path,'..\..\Library_HodgeLaplace')
+            path(path,'..\Library_SingleElement')
+            path(path,'Library_ZeroForms')
         elseif isunix
 
         end
@@ -15,10 +15,10 @@ switch in
     case 'finish'
 
         if ispc
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\Library_SingleGrid')
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Library_HodgeLaplace')
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\Library_SingleElement')
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\zero-forms\Library_ZeroForms')
+            rmpath('..\..\..\Library_SingleGrid')
+            rmpath('..\..\Library_HodgeLaplace')
+            rmpath('..\Library_SingleElement')
+            rmpath('Library_ZeroForms')
         elseif isunix
 
         end

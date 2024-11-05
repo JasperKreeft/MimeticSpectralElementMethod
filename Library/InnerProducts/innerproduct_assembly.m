@@ -5,8 +5,6 @@ global numElements
 
 switch form
 
-
-
     case 0 % zero-forms
 
         global nr_0 globalnr_0 
