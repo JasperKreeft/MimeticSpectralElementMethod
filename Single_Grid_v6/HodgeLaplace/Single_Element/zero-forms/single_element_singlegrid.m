@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-% run Library_ZeroForms/GetLibrary.m
+run Library_ZeroForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -24,9 +24,10 @@ FunctionType = 'sine';
 Domain       = 'SinDeformGrid';%'SinCosDeformGrid';%'MuST';%'LavalNozzle';%'parallellogram';%
 DomInfo      = 0.2;
 
+PeriodicBCs = true;
 bc = [ 1 1 1 1 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 4:4:16;%3:2:25;
+NrCellRange = 4;%2:4:20;%18;%3:2:25;
 numElements = 1;
 
 plot_figures  = 1;
@@ -73,7 +74,14 @@ Wbc = boundaryIntegral([0 1]);
 
 F(globalnr_0,1) = forcefunction(0,Mesh.X,Mesh.Y,FunctionType);
 
-[PHIbc,Ubc,boundary_points,interior_points] = boundaryconditions_0_square(Mesh,FunctionType,bc);
+if PeriodicBCs
+    boundary_points = unique([N+1:N+1:(N+1)^2 N*(N+1)+(1:N+1)]);
+    periodic_points = unique([1:N+1 1:N+1:(N+1)^2]);
+    interior_points = (1:nr_0)';
+    interior_points(boundary_points) = [];
+else
+    [PHIbc,Ubc,boundary_points,interior_points] = boundaryconditions_0_square(Mesh,FunctionType,bc);
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Construct system matrix and righthandside
@@ -85,10 +93,16 @@ RHS = M0*F;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Remove Boundary Conditions
 
-RHS = RHS - Wbc*Ubc;
+if PeriodicBCs
+    Matrix(:,periodic_points) = Matrix(:,periodic_points) + Matrix(:,boundary_points);
+    Matrix(periodic_points,:) = Matrix(periodic_points,:) + Matrix(boundary_points,:);
+    RHS(periodic_points) = RHS(periodic_points) + RHS(boundary_points);
+else
+    RHS = RHS - Wbc*Ubc;
 
-if ~isempty(boundary_points)
-RHS = RHS - Matrix(:,boundary_points)*PHIbc;
+    if ~isempty(boundary_points)
+        RHS = RHS - Matrix(:,boundary_points)*PHIbc;
+    end
 end
 
 Matrix(:,boundary_points) = [];
@@ -97,7 +111,7 @@ Matrix(boundary_points,:) = [];
 RHS(boundary_points) = [];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Solve system and add boundary conditions to data
+%% Solve system
 
 PHI_in = Matrix\RHS;
 
@@ -105,9 +119,16 @@ PHI_in = Matrix\RHS;
 % y=L\RHS;
 % PHI_in = U\y;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Add boundary conditions to data
+
 PHI = zeros(nr_0,1);
 PHI(interior_points) = PHI_in;
-PHI(boundary_points) = PHIbc;
+if PeriodicBCs
+    PHI(boundary_points) = PHI(periodic_points);
+else
+    PHI(boundary_points) = PHIbc;
+end
 
 % Gradient values
 Q = NG*PHI;
@@ -164,6 +185,6 @@ end
 %% Close libraries
 
 in = 'finish';
-% GetLibrary
+GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

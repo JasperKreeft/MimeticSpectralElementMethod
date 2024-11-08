@@ -46,7 +46,7 @@ switch form
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     case 1
 
-        if form~=1 || nargin==3
+        if nargin<3
             error('JK: Number of input arguments are not correct')
         end
 

@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-% run Library_ZeroForms/GetLibrary.m
+run Library_ZeroForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -81,6 +81,6 @@ plot_convergence_eigenvalues("N",NrCellRange,error,exact)
 %% Close libraries
 
 in = 'finish';
-% GetLibrary
+GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

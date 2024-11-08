@@ -4,10 +4,10 @@ switch in
     case 'start'
         
         if ispc
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\Library_SingleGrid')
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Library_HodgeLaplace')
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\Library_SingleElement')
-            path(path,'C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\one-forms\Library')
+            path(path,genpath('..\..\..\..\..\Library'))
+            path(path,'..\..\..\Library_HodgeLaplace')
+            path(path,'..\..\Library_SingleElement')
+            path(path,'..\Library')
         elseif isunix
 
         end
@@ -15,10 +15,10 @@ switch in
     case 'finish'
 
         if ispc
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\Library_SingleGrid')
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Library_HodgeLaplace')
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\Library_SingleElement')
-            rmpath('C:\Users\Zolder\Documents\MATLAB\MSEM\Single_Grid_v6\HodgeLaplace\Single_Element\one-forms\Library')
+            rmpath(genpath('..\..\..\..\Library'))
+            rmpath('..\..\Library_HodgeLaplace')
+            rmpath('..\Library_SingleElement')
+            rmpath('Library')
         elseif isunix
 
         end

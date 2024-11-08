@@ -4,10 +4,10 @@ switch in
     case 'start'
 
         if ispc
-            path(path,'..\..\..\Library_SingleGrid')
-            path(path,'..\..\Library_HodgeLaplace')
-            path(path,'..\Library_SingleElement')
-            path(path,'Library_ZeroForms')
+            path(path,genpath('..\..\..\..\Library'))
+            path(path,'..\..\..\Library_HodgeLaplace')
+            path(path,'..\..\Library_SingleElement')
+            path(path,'..\Library_ZeroForms')
         elseif isunix
 
         end
@@ -15,7 +15,7 @@ switch in
     case 'finish'
 
         if ispc
-            rmpath('..\..\..\Library_SingleGrid')
+            rmpath(genpath('..\..\..\Library'))
             rmpath('..\..\Library_HodgeLaplace')
             rmpath('..\Library_SingleElement')
             rmpath('Library_ZeroForms')

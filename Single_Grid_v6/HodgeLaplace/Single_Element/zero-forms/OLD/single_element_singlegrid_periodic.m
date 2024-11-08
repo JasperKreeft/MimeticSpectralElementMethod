@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-% run Library_ZeroForms/GetLibrary.m
+run Library_ZeroForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -26,7 +26,7 @@ DomInfo      = 0.2;
 
 bc = [ 1 1 1 1 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 18;%3:2:25;
+NrCellRange = 2:4:20;%18;%3:2:25;
 numElements = 1;
 
 plot_figures  = 1;
@@ -90,11 +90,11 @@ RHS = M0*F;
 
 Matrix(:,periodic_points) = Matrix(:,periodic_points) + Matrix(:,boundary_points);
 Matrix(periodic_points,:) = Matrix(periodic_points,:) + Matrix(boundary_points,:);
+RHS(periodic_points) = RHS(periodic_points) + RHS(boundary_points);
 
 Matrix(:,boundary_points) = [];
 Matrix(boundary_points,:) = [];
 
-RHS(periodic_points) = RHS(periodic_points) + RHS(boundary_points);
 RHS(boundary_points) = [];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
