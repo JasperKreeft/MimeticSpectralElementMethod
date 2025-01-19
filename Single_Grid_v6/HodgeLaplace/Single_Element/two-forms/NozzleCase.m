@@ -7,7 +7,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-% run Library_TwoForms/GetLibrary.m
+run Library_TwoForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -125,7 +125,7 @@ phi_ex        = exact_solution(Meshp.X,Meshp.Y,FunctionType,'zerotwo');
 
 % phi_exact = ???
 % phi_interp = reconstruct_twoforms(phi_exact,eGL,Jp);
-[Qxi_interp Qeta_interp] = fluxValue(FunctionType,Domain,DomInfo);
+[Qxi_interp,Qeta_interp] = fluxValue(FunctionType,Domain,DomInfo);
 Q_interp = zeros(nr_2,1);
 [qx_int,qy_int,q_interp] = reconstruct(1,Qxi_interp,Qeta_interp,hGLp,eGLp,Meshp);
 
@@ -138,6 +138,6 @@ plotten
 %% Close libraries
 
 in = 'finish';
-% GetLibrary
+GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

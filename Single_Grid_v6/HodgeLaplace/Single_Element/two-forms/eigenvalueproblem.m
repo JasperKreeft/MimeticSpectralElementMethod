@@ -21,7 +21,7 @@ global h e
 Domain       = 'CurlCurl';
 DomInfo      = 0.2;
 
-NrCellRange = 4:4:16;
+NrCellRange = 4:4:30;
 
 error_figures = 1;
 
