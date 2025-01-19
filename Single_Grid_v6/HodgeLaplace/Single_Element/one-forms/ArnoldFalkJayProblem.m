@@ -75,7 +75,7 @@ M1 = innerproduct(1,Mesh.J,Mesh.Qinv);
 
 M2 = innerproduct(2,Mesh.J);
 
-[fx fy] = forcefunction(1,1,1,FunctionType,Domain,DomInfo);
+[fx,fy] = forcefunction(1,1,1,FunctionType,Domain,DomInfo);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Construct system matrix and solve system

@@ -7,7 +7,7 @@ switch in
             path(path,genpath('..\..\..\..\..\Library'))
             path(path,'..\..\..\Library_HodgeLaplace')
             path(path,'..\..\Library_SingleElement')
-            path(path,'..\Library')
+            path(path,'..\Library_OneForms')
         elseif isunix
 
         end
@@ -18,7 +18,7 @@ switch in
             rmpath(genpath('..\..\..\..\Library'))
             rmpath('..\..\Library_HodgeLaplace')
             rmpath('..\Library_SingleElement')
-            rmpath('Library')
+            rmpath('Library_OneForms')
         elseif isunix
 
         end
