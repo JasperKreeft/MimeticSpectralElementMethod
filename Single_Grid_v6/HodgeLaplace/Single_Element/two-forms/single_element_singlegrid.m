@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-% run Library_TwoForms/GetLibrary.m
+run Library_TwoForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -22,14 +22,15 @@ global nr_1 nr_2
 
 FunctionType = 'sine';
 Domain       = 'SinDeformGrid';%'LavalNozzle';%'parallellogram';
-DomInfo      = 0.2;
+DomInfo      = 0.1;
 
+PeriodicBCs = true;
 bc = [ 1 0 0 0 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 4:4:16;%2:2:20;%4:4:40;
+NrCellRange = 4:2:30;%2:2:20;%4:4:40;
 
-plot_figures  = 1;
-error_figures = 1;
+plot_figures  = false;
+error_figures = true;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start P-convergence loop
@@ -70,7 +71,19 @@ Wbc = boundaryIntegral([1 2]);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Forcing function and boundary conditions
 
-[PHIbc,Qbc,boundary_flux,interior_flux] = boundaryconditions_1_square(FunctionType,Domain,DomInfo,bc);
+if PeriodicBCs
+    indL = 1:N+1:N*(N+1);
+    indR = N+1:N+1:N*(N+1);
+    indB = N*(N+1)+indL;
+    indT = N*(N+1)+indR;
+    boundary_1 = [indL indB];
+    boundary_2 = [indR indT];
+
+    interior_flux = 1:2*N*(N+1); interior_flux(boundary_2) = [];
+
+else
+    [PHIbc,Qbc,boundary_flux,interior_flux] = boundaryconditions_1_square(FunctionType,Domain,DomInfo,bc);
+end
 
 F = forcefunction(2,1,1,FunctionType,Domain,DomInfo);
 
@@ -80,23 +93,40 @@ F = forcefunction(2,1,1,FunctionType,Domain,DomInfo);
 Matrix = [   M1          D'*M2
             M2*D  spalloc(nr_2,nr_2,0) ];
 
+if PeriodicBCs
+    % To avoid a singular (badly scaled) Matrix
+    Matrix = Matrix + 1e-10*spdiags(ones(length(Matrix),1),size(Matrix,1),size(Matrix,2));
+end
+
 RHS = [zeros(nr_1,1) ; M2*F];
 
-% A = M2*D*inv(M1)*D'*M2;
-% A = M2*D*(M1\D')*M2;
-A = M2*D/M1*D'*M2;
+% % A = M2*D*inv(M1)*D'*M2;
+% % A = M2*D*(M1\D')*M2;
+% A = M2*D/M1*D'*M2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Remove Boundary Conditions
 
-RHS(1:nr_1) = RHS(1:nr_1) + Wbc*PHIbc;
-if ~isempty(boundary_flux)
-RHS = RHS - Matrix(:,boundary_flux)*Qbc;
+if PeriodicBCs
+    Matrix(:,boundary_1) = Matrix(:,boundary_1)+Matrix(:,boundary_2);
+    Matrix(boundary_1,:) = Matrix(boundary_1,:)+Matrix(boundary_2,:);
+    
+    Matrix(:,boundary_2) = [];
+    Matrix(boundary_2,:) = [];
+    
+    RHS(boundary_2) = [];
 
-Matrix(:,boundary_flux) = [];
-Matrix(boundary_flux,:) = [];
+else
+    RHS(1:nr_1) = RHS(1:nr_1) + Wbc*PHIbc;
+    if ~isempty(boundary_flux)
+        RHS = RHS - Matrix(:,boundary_flux)*Qbc;
+        
+        Matrix(:,boundary_flux) = [];
+        Matrix(boundary_flux,:) = [];
+        
+        RHS(boundary_flux) = [];
+    end
 
-RHS(boundary_flux) = [];
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,13 +134,21 @@ end
 
 QPHI = Matrix\RHS;
 
-ind = nr_1-length(boundary_flux);
+if PeriodicBCs
+    ind = nr_1-length(boundary_2);
+else
+    ind = nr_1-length(boundary_flux);
+end
 Q_in = QPHI(1:ind);
 PHI  = QPHI(ind+1:end);
 
 Q = zeros(nr_1,1);
 Q(interior_flux) = Q_in;
-Q(boundary_flux) = Qbc;
+if PeriodicBCs
+    Q(boundary_2) = Q(boundary_1);
+else
+    Q(boundary_flux) = Qbc;
+end
 
 PHI = PHI(globalnr_2);
 Qxi  = Q(globalnr_1v);
@@ -127,9 +165,9 @@ phi          = reconstruct(2,PHI,eGLp,Meshp);
 [qx,qy,qMag] = reconstruct(1,Qxi,Qeta,hGLp,eGLp,Meshp);
 
 % Interpolated solution
-PHI_exact    = potentialValue(xi,eta,FunctionType,Domain,DomInfo); % Nodal exact
-phi_interp   = reconstruct(2,PHI_exact,eGLp,Meshp);
-[Qxi_interp Qeta_interp] = fluxValue(FunctionType,Domain,DomInfo);
+PHI_exact                      = potentialValue(xi,eta,FunctionType,Domain,DomInfo); % Nodal exact
+phi_interp                     = reconstruct(2,PHI_exact,eGLp,Meshp);
+[Qxi_interp,Qeta_interp]       = fluxValue(FunctionType,Domain,DomInfo);
 [qx_interp,qy_interp,q_interp] = reconstruct(1,Qxi_interp,Qeta_interp,hGLp,eGLp,Meshp);
 
 % Exact Solution
@@ -164,6 +202,7 @@ end
 %% Close libraries
 
 in = 'finish';
-% GetLibrary
+GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%#ok<*UNRCH> 

@@ -6,7 +6,7 @@ clc
 %% Load libraries
 
 in = 'start';                                                   %#ok<NASGU>
-% run Library_TwoForms/GetLibrary.m
+run Library_TwoForms/GetLibrary.m
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Call global variables
@@ -22,13 +22,13 @@ global nr_1 nr_2
 
 FunctionType = 'sine';
 Domain       = 'SinDeformGrid';%'LavalNozzle';%'parallellogram';
-DomInfo      = 0.2;
+DomInfo      = 0.1;
 
 bc = [ 0 0 0 0 ]; % 1 = Dirichlet, 0 = Neumann
 
-NrCellRange = 2:2:20;%4:4:40;
+NrCellRange = 2:2:30;%4:4:40;
 
-plot_figures  = 1;
+plot_figures  = 0;
 error_figures = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -80,7 +80,7 @@ F = forcefunction(2,1,1,FunctionType,Domain,DomInfo);
 Matrix = [   M1          D'*M2
             M2*D  spalloc(nr_2,nr_2,0) ];
 
-Matrix = Matrix + eps*spdiags(ones(length(Matrix),1),size(Matrix,1),size(Matrix,2));
+Matrix = Matrix + 1e-10*spdiags(ones(length(Matrix),1),size(Matrix,1),size(Matrix,2));
 
 RHS = [zeros(nr_1,1) ; M2*F];
 
@@ -131,9 +131,9 @@ phi          = reconstruct(2,PHI,eGLp,Meshp);
 [qx,qy,qMag] = reconstruct(1,Qxi,Qeta,hGLp,eGLp,Meshp);
 
 % Interpolated solution
-PHI_exact    = potentialValue(xi,eta,FunctionType,Domain,DomInfo); % Nodal exact
-phi_interp   = reconstruct(2,PHI_exact,eGLp,Meshp);
-[Qxi_interp Qeta_interp] = fluxValue(FunctionType,Domain,DomInfo);
+PHI_exact                      = potentialValue(xi,eta,FunctionType,Domain,DomInfo); % Nodal exact
+phi_interp                     = reconstruct(2,PHI_exact,eGLp,Meshp);
+[Qxi_interp,Qeta_interp]       = fluxValue(FunctionType,Domain,DomInfo);
 [qx_interp,qy_interp,q_interp] = reconstruct(1,Qxi_interp,Qeta_interp,hGLp,eGLp,Meshp);
 
 % Exact Solution
@@ -168,6 +168,6 @@ end
 %% Close libraries
 
 in = 'finish';
-% GetLibrary
+GetLibrary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
